@@ -1,0 +1,18 @@
+{
+  "name": "weather-crypto-widget",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/my-widget.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "serve": "vite preview --port 3002"
+  },
+  "dependencies": {
+    "lit": "^3.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
+  }
+}

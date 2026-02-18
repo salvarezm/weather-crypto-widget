@@ -1,0 +1,19 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx server.ts",
+    "build": "tsc",
+    "start:prod": "node dist/server.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.0",
+    "fastify": "^4.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  }
+}

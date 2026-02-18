@@ -1,0 +1,17 @@
+{
+  "name": "bci-weather-crypto",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w weather-crypto-widget && concurrently \"npm:dev:*\"",
+    "dev:api": "npm run start -w api",
+    "dev:widget": "npm run serve -w weather-crypto-widget",
+    "dev:frontend": "npm run dev -w frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
