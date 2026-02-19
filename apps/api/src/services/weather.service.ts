@@ -8,23 +8,22 @@ import { config } from 'dotenv';
 config();
 
 // la api de clima no es estable
-axiosRetry(axios, { retryDelay: (retryCount) => {
-  return retryCount * 1000;
-}});
+axiosRetry(axios, {
+  retryDelay: (retryCount) => {
+    return retryCount * 1000;
+  },
+});
 
-interface weatherServiceProps {}
-
-async function weatherService(fastify: FastifyInstance, opts: weatherServiceProps) {
+async function weatherService(fastify: FastifyInstance) {
   fastify.decorate('weatherService', {
     async getWeather(): Promise<WeatherApiResponse | null> {
-
       // validamos que exista la api key
-      const WEATHERAPI_KEY = process.env.WEATHERAPI_KEY
+      const WEATHERAPI_KEY = process.env.WEATHERAPI_KEY;
       if (!WEATHERAPI_KEY) {
-        fastify.log.error("La api key WEATHERAPI_KEY no esta definida");
+        fastify.log.error('La api key WEATHERAPI_KEY no esta definida');
         return null;
       }
-      
+
       // llamamos a la api del clima
       const res = await axios.post(
         `http://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=Santiago`,
@@ -33,9 +32,6 @@ async function weatherService(fastify: FastifyInstance, opts: weatherServiceProp
           timeout: 5000,
         }
       );
-
-      if (res.status !== 200) {
-      }
 
       return res.data as WeatherApiResponse;
     },

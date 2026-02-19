@@ -1,5 +1,9 @@
 export interface WeatherService {
-  getWeather(): Promise<WeatherApiResponse | null> ;
+  getWeather(): Promise<WeatherApiResponse | null>;
+}
+
+export interface CryptoService {
+  getBtcData(): Promise<CoinGeckoResponse | null>;
 }
 
 export interface WeatherApiResponse {
@@ -19,8 +23,17 @@ export interface WeatherApiResponse {
   };
 }
 
+export interface CoinGeckoResponse {
+  bitcoin: {
+    clp: number;
+    clp_24h_change: number;
+    last_updated_at: number;
+  };
+}
+
 declare module 'fastify' {
   interface FastifyInstance {
     weatherService: WeatherService;
+    cryptoService: CryptoService;
   }
 }

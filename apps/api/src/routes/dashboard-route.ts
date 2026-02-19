@@ -1,14 +1,15 @@
-import fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 
-interface DashboardOptions {}
-
-const registerDashboardRoute = async (app: FastifyInstance, options: DashboardOptions) => {
+const registerDashboardRoute = async (app: FastifyInstance) => {
   app.get('/api/dashboard-widget', async (request: FastifyRequest, reply: FastifyReply) => {
-    const clima = await app.weatherService.getWeather();
+    const [wheaterResult, cryptoResult] = await Promise.allSettled([
+      app.weatherService.getWeather(),
+      app.cryptoService.getBtcData(),
+    ]);
 
     reply.status(200).send({
-      hello: 'world',
-      clima,
+      wheaterResult,
+      cryptoResult,
     });
   });
 };
