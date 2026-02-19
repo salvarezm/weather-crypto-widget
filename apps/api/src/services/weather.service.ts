@@ -33,6 +33,8 @@ async function weatherService(fastify: FastifyInstance) {
         }
       );
 
+      console.log(res.data);
+
       return res.data as WeatherApiResponse;
     },
   });
