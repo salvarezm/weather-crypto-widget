@@ -1,5 +1,5 @@
 export interface WeatherService {
-  getWeather(): Promise<WeatherApiResponse>;
+  getWeather(): Promise<WeatherApiResponse | null> ;
 }
 
 export interface WeatherApiResponse {
