@@ -5,10 +5,10 @@ export default defineConfig({
     lib: {
       entry: 'src/my-widget.ts',
       formats: ['es'],
-      fileName: 'my-widget'
-    }
+      fileName: 'my-widget',
+    },
   },
   preview: {
-    cors: true
-  }
+    cors: true,
+  },
 });

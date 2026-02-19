@@ -2,6 +2,7 @@
   "name": "bci-weather-crypto",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "apps/*"
   ],
@@ -9,9 +10,18 @@
     "dev": "npm run build -w weather-crypto-widget && concurrently \"npm:dev:*\"",
     "dev:api": "npm run start -w api",
     "dev:widget": "npm run serve -w weather-crypto-widget",
-    "dev:frontend": "npm run dev -w frontend"
+    "dev:frontend": "npm run dev -w frontend",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "@eslint/js": "^9.39.2",
+    "concurrently": "^8.2.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
+    "typescript-eslint": "^8.56.0"
   }
 }

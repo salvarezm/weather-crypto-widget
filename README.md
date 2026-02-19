@@ -1,6 +1,6 @@
 # Wheather Crypto Widget
 
-Wheather Crypto Widget es un Web Component desarrollado con lit que entrega los datos del clima y el precio del bitcoin actuales. 
+Wheather Crypto Widget es un Web Component desarrollado con lit que entrega los datos del clima y el precio del bitcoin actuales.
 
 ## Entorno local
 
@@ -8,7 +8,7 @@ Primero es necesaria la instalacion de dependencias
 
 `npm install`
 
-Para ejecutar todo el proyecto y ver la version live corriendo ejecuta en el root del proyecto: 
+Para ejecutar todo el proyecto y ver la version live corriendo ejecuta en el root del proyecto:
 
 `npm run dev`
 
