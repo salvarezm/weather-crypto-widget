@@ -2,11 +2,364 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Frontend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noticias del Día - Portal Informativo</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      header {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      .logo span {
+        color: #e94560;
+      }
+
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        gap: 1rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #e94560;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .main-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: #1a1a2e;
+        border-bottom: 3px solid #e94560;
+        padding-bottom: 0.5rem;
+      }
+
+      .featured-news {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #e94560;
+      }
+
+      .featured-news h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: #1a1a2e;
+      }
+
+      .featured-news .meta {
+        color: #888;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .featured-news p {
+        color: #555;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .news-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        border-left: 3px solid transparent;
+      }
+
+      .news-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        border-left-color: #e94560;
+      }
+
+      .news-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #1a1a2e;
+      }
+
+      .news-card .meta {
+        color: #888;
+        font-size: 0.8rem;
+      }
+
+      .category-tag {
+        display: inline-block;
+        background: #e94560;
+        color: white;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .category-tag.tech {
+        background: #667eea;
+      }
+
+      .category-tag.sports {
+        background: #28a745;
+      }
+
+      .category-tag.world {
+        background: #17a2b8;
+      }
+
+      .category-tag.science {
+        background: #fd7e14;
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        order: -1;
+      }
+
+      .main-content {
+        order: 1;
+      }
+
+      .sidebar-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #1a1a2e;
+        border-bottom: 2px solid #e94560;
+        padding-bottom: 0.5rem;
+      }
+
+      .widget-container {
+      }
+
+      .trending-list {
+        list-style: none;
+      }
+
+      .trending-list li {
+        padding: 0.7rem 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        gap: 0.8rem;
+        align-items: flex-start;
+      }
+
+      .trending-list li:last-child {
+        border-bottom: none;
+      }
+
+      .trending-number {
+        color: #e94560;
+        font-weight: bold;
+        font-size: 1.1rem;
+        min-width: 1.5rem;
+      }
+
+      .trending-title {
+        font-size: 0.9rem;
+      }
+
+      footer {
+        background: #1a1a2e;
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        font-size: 0.9rem;
+      }
+
+      /* Tablet */
+      @media (min-width: 600px) {
+        .news-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        nav ul {
+          gap: 1.5rem;
+        }
+      }
+
+      /* Desktop */
+      @media (min-width: 900px) {
+        .container {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          padding: 2rem;
+        }
+
+        .sidebar {
+          order: 1;
+        }
+
+        .main-content {
+          order: 0;
+        }
+
+        .featured-news h3 {
+          font-size: 1.5rem;
+        }
+
+        nav ul {
+          gap: 2rem;
+        }
+      }
+
+      /* Large Desktop */
+      @media (min-width: 1100px) {
+        .news-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Mi App</h1>
-    <my-widget></my-widget>
+    <header>
+      <div class="logo">Noticias<span>Hoy</span></div>
+      <nav>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Economia</a></li>
+          <li><a href="#">Tecnologia</a></li>
+          <li><a href="#">Deportes</a></li>
+          <li><a href="#">Opinion</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container">
+      <main class="main-content">
+        <h2>Noticias Destacadas</h2>
+
+        <article class="featured-news">
+          <span class="category-tag">Economia</span>
+          <h3>Mercados financieros registran movimientos historicos en la jornada de hoy</h3>
+          <p class="meta">Por Juan Perez | Hace 2 horas</p>
+          <p>
+            Los principales indices bursatiles mostraron variaciones significativas durante la
+            sesion de trading, con inversores atentos a los indicadores economicos globales y las
+            decisiones de politica monetaria.
+          </p>
+        </article>
+
+        <div class="news-grid">
+          <article class="news-card">
+            <span class="category-tag tech">Tecnologia</span>
+            <h4>Nuevas tendencias en inteligencia artificial transforman la industria</h4>
+            <p class="meta">Hace 4 horas</p>
+          </article>
+
+          <article class="news-card">
+            <span class="category-tag sports">Deportes</span>
+            <h4>Resultados de la jornada deportiva: sorpresas y confirmaciones</h4>
+            <p class="meta">Hace 5 horas</p>
+          </article>
+
+          <article class="news-card">
+            <span class="category-tag world">Internacional</span>
+            <h4>Cumbre mundial aborda desafios climaticos con nuevos compromisos</h4>
+            <p class="meta">Hace 6 horas</p>
+          </article>
+
+          <article class="news-card">
+            <span class="category-tag science">Ciencia</span>
+            <h4>Investigadores anuncian avance significativo en energia renovable</h4>
+            <p class="meta">Hace 8 horas</p>
+          </article>
+        </div>
+      </main>
+
+      <aside class="sidebar">
+        <div class="widget-container">
+          <my-widget></my-widget>
+        </div>
+
+        <section class="sidebar-section">
+          <h3>Tendencias</h3>
+          <ul class="trending-list">
+            <li>
+              <span class="trending-number">1</span>
+              <span class="trending-title">Bitcoin alcanza nuevo maximo historico</span>
+            </li>
+            <li>
+              <span class="trending-number">2</span>
+              <span class="trending-title">Reforma fiscal: lo que debes saber</span>
+            </li>
+            <li>
+              <span class="trending-number">3</span>
+              <span class="trending-title">Pronostico del tiempo para el fin de semana</span>
+            </li>
+            <li>
+              <span class="trending-number">4</span>
+              <span class="trending-title">Startups tecnologicas lideran el mercado</span>
+            </li>
+            <li>
+              <span class="trending-number">5</span>
+              <span class="trending-title">Nuevas politicas de trabajo remoto</span>
+            </li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 NoticiasHoy - Portal Informativo. Todos los derechos reservados.</p>
+    </footer>
+
     <script type="module" src="http://localhost:3002/my-widget.js"></script>
   </body>
 </html>
