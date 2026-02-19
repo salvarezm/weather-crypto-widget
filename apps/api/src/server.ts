@@ -1,10 +1,16 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import DashboardRoute from './routes/dashboard-route';
 import WeatherService from './services/weather.service';
 import CryptoService from './services/crypto.service';
 
 const fastify = Fastify({
   logger: true,
+});
+
+fastify.register(cors, {
+  origin: true,
+  methods: ['GET', 'OPTIONS'],
 });
 
 fastify.register(WeatherService);

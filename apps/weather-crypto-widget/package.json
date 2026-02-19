@@ -2,7 +2,7 @@
   "name": "weather-crypto-widget",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/my-widget.js",
+  "main": "dist/weather-crypto-widget.js",
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",

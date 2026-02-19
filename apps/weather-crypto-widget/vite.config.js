@@ -3,9 +3,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/my-widget.ts',
+      entry: 'src/weather-crypto-widget.ts',
       formats: ['es'],
-      fileName: 'my-widget',
+      fileName: 'weather-crypto-widget',
     },
   },
   preview: {
