@@ -1,12 +1,18 @@
 export interface WeatherData {
-  city: string;
-  country: string;
-  temperature: number;
-  feelsLike: number;
-  humidity: number;
-  windSpeed: number;
-  description: string;
-  icon: string;
+  location: {
+    name: string;
+    country: string;
+  };
+  current: {
+    temp_c: number;
+    feelslike_c: number;
+    humidity: number;
+    wind_kph: number;
+    condition: {
+      text: string;
+      icon: string;
+    };
+  };
 }
 
 export interface CryptoData {
@@ -17,15 +23,7 @@ export interface CryptoData {
   };
 }
 
-export interface ApiError {
-  source: 'weather' | 'bitcoin';
-  message: string;
-  status?: number;
-}
-
 export interface DashboardData {
-  wheaterData: WeatherData | null;
-  cryptoData: CryptoData | null;
-  timestamp: string;
-  errors?: ApiError[];
+  weather: WeatherData | null;
+  crypto: CryptoData | null;
 }

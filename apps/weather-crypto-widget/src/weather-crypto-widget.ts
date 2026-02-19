@@ -1,9 +1,12 @@
 import { LitElement, html } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { DashboardData } from './types';
+import { globalStyles } from './styles';
 
 @customElement('weather-crypto-widget')
 export class WeatherCryptoWidget extends LitElement {
+  static override styles = globalStyles;
+
   @property({ type: String })
   city = 'Santiago';
 
@@ -20,7 +23,7 @@ export class WeatherCryptoWidget extends LitElement {
       }
 
       const data = (await response.json()) as DashboardData;
-      console.log(data);
+
       this.data = data;
     } catch (err) {
       throw new Error(`Error en el widget: ${err}`);
@@ -41,20 +44,68 @@ export class WeatherCryptoWidget extends LitElement {
     this.fetchData();
   }
 
-  render() {
-    return html`<div>
-      <h1>Santiago, CL</h1>
-      <span> 18 Feb, 2026 - 13:40</span>
-      <div>☀️ 27°C Despejado</div>
-      <hr />
-      <div>Humedad 42% Viento 12 km/h Máx/Mín 29° / 18°</div>
-      <hr />
-      <div>
-        Bitcoin BTC/CLP
-        ${this.data?.cryptoData?.bitcoin.clp &&
-        this.formatPrice(this.data?.cryptoData?.bitcoin.clp)}
-        +2.4% ↑
+  //weather section
+  private renderWeatherSection() {
+    const weather = this.data?.weather;
+
+    if (!weather) {
+      return html`
+        <div>
+          <div>Clima no disponible</div>
+        </div>
+      `;
+    }
+
+    return html`
+      <div class="weather-section">
+        <div class="weather-icon">
+          <img src=${weather.current?.condition?.icon} />
+        </div>
+        <div>
+          <div>${weather.location?.name}, ${weather.location?.country}</div>
+          <div class="weather-title">${weather.current.temp_c} °C</div>
+          <div>${weather.current.condition.text}</div>
+          <div class="widget-secondary-text">
+            <div>Sensación: ${weather.current?.feelslike_c} °C</div>
+            <div>Humedad: ${weather.current?.humidity} %</div>
+          </div>
+        </div>
       </div>
+    `;
+  }
+
+  //crypto section
+
+  private renderCryptoSection() {
+    const crypto = this.data?.crypto;
+
+    if (!crypto) {
+      return html`
+        <div>
+          <div>Datos de bitcoin no disponibles</div>
+        </div>
+      `;
+    }
+
+    return html`
+      <div class="bitcoin-section">
+        <div class="bitcoin-icon">
+          <div class="bitcoin-logo">&#8383;</div>
+        </div>
+        <div class="bitcoin-info">
+          <div>Bitcoin (BTC)</div>
+          <div class="bitcoin-title">${this.formatPrice(crypto.bitcoin?.clp)}</div>
+          <div class=${crypto.bitcoin?.clp_24h_change > 0 ? 'bitcoin-up' : 'bitcoin-down'}>
+            ${crypto.bitcoin?.clp_24h_change.toFixed(2)}% (24h)
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  render() {
+    return html` <div class="widget-card">
+      <div class="widget-content">${this.renderWeatherSection()} ${this.renderCryptoSection()}</div>
     </div>`;
   }
 }
