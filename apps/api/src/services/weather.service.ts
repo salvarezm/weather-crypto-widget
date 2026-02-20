@@ -16,7 +16,7 @@ axiosRetry(axios, {
 
 async function weatherService(fastify: FastifyInstance) {
   fastify.decorate('weatherService', {
-    async getWeather(): Promise<WeatherApiResponse | null> {
+    async getWeather(city: string = 'Santiago'): Promise<WeatherApiResponse | null> {
       // validamos que exista la api key
       const WEATHERAPI_KEY = process.env.WEATHERAPI_KEY;
       if (!WEATHERAPI_KEY) {
@@ -26,7 +26,7 @@ async function weatherService(fastify: FastifyInstance) {
 
       // llamamos a la api del clima
       const res = await axios.post(
-        `http://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=Santiago`,
+        `http://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${city}`,
         {},
         {
           timeout: 5000,

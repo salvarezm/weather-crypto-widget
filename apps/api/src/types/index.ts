@@ -1,5 +1,5 @@
 export interface WeatherService {
-  getWeather(): Promise<WeatherApiResponse | null>;
+  getWeather(city: string): Promise<WeatherApiResponse | null>;
 }
 
 export interface CryptoService {

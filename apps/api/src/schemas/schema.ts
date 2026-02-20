@@ -1,3 +1,10 @@
+export const dashboardQuerySchema = {
+  type: 'object',
+  properties: {
+    city: { type: 'string' },
+  },
+} as const;
+
 export const dashboardResponseSchema = {
   type: 'object',
   properties: {

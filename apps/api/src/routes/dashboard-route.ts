@@ -1,20 +1,23 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { CoinGeckoResponse, WeatherApiResponse } from '../types';
-import { dashboardResponseSchema } from '../schemas/schema';
+import { dashboardQuerySchema, dashboardResponseSchema } from '../schemas/schema';
 
 const registerDashboardRoute = async (app: FastifyInstance) => {
   app.get(
     '/api/dashboard-widget',
     {
       schema: {
+        querystring: dashboardQuerySchema,
         response: {
           200: dashboardResponseSchema,
         },
       },
     },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (request: FastifyRequest<{ Querystring: { city: string } }>, reply: FastifyReply) => {
+      const city = request.query.city ?? 'Santiago';
+
       const [weatherResult, cryptoResult] = await Promise.allSettled([
-        app.weatherService.getWeather(),
+        app.weatherService.getWeather(city),
         app.cryptoService.getBtcData(),
       ]);
 

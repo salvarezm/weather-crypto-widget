@@ -230,6 +230,37 @@
       }
 
       .widget-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      #city-select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        font-family: inherit;
+        font-weight: 500;
+        color: #1a1a1a;
+        background-color: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 12px;
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23555' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        transition: all 0.2s ease;
+      }
+
+      #city-select:hover {
+        border-color: #0066ff;
+      }
+
+      #city-select:focus {
+        outline: none;
+        border-color: #0066ff;
+        box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
       }
 
       .trending-list {
@@ -436,7 +467,134 @@
 
       <aside class="sidebar">
         <div class="widget-container">
-          <weather-crypto-widget></weather-crypto-widget>
+          <select id="city-select">
+            <option value="Arica,Chile">Arica</option>
+            <option value="Iquique,Chile">Iquique</option>
+            <option value="Alto Hospicio,Chile">Alto Hospicio</option>
+            <option value="Pozo Almonte,Chile">Pozo Almonte</option>
+            <option value="Antofagasta,Chile">Antofagasta</option>
+            <option value="Calama,Chile">Calama</option>
+            <option value="Tocopilla,Chile">Tocopilla</option>
+            <option value="Taltal,Chile">Taltal</option>
+            <option value="Mejillones,Chile">Mejillones</option>
+            <option value="San Pedro de Atacama,Chile">San Pedro de Atacama</option>
+            <option value="Copiapó,Chile">Copiapó</option>
+            <option value="Vallenar,Chile">Vallenar</option>
+            <option value="Chañaral,Chile">Chañaral</option>
+            <option value="Diego de Almagro,Chile">Diego de Almagro</option>
+            <option value="Caldera,Chile">Caldera</option>
+            <option value="Tierra Amarilla,Chile">Tierra Amarilla</option>
+            <option value="La Serena,Chile">La Serena</option>
+            <option value="Coquimbo,Chile">Coquimbo</option>
+            <option value="Ovalle,Chile">Ovalle</option>
+            <option value="Illapel,Chile">Illapel</option>
+            <option value="Salamanca,Chile">Salamanca</option>
+            <option value="Los Vilos,Chile">Los Vilos</option>
+            <option value="Andacollo,Chile">Andacollo</option>
+            <option value="Vicuña,Chile">Vicuña</option>
+            <option value="Valparaíso,Chile">Valparaíso</option>
+            <option value="Viña del Mar,Chile">Viña del Mar</option>
+            <option value="Quilpué,Chile">Quilpué</option>
+            <option value="Villa Alemana,Chile">Villa Alemana</option>
+            <option value="San Antonio,Chile">San Antonio</option>
+            <option value="Quillota,Chile">Quillota</option>
+            <option value="Los Andes,Chile">Los Andes</option>
+            <option value="San Felipe,Chile">San Felipe</option>
+            <option value="La Calera,Chile">La Calera</option>
+            <option value="Limache,Chile">Limache</option>
+            <option value="Olmué,Chile">Olmué</option>
+            <option value="Concón,Chile">Concón</option>
+            <option value="Casablanca,Chile">Casablanca</option>
+            <option value="La Ligua,Chile">La Ligua</option>
+            <option value="Petorca,Chile">Petorca</option>
+            <option value="Isla de Pascua,Chile">Isla de Pascua</option>
+            <option value="Santiago,Chile" selected>Santiago</option>
+            <option value="Puente Alto,Chile">Puente Alto</option>
+            <option value="Maipú,Chile">Maipú</option>
+            <option value="La Florida,Chile">La Florida</option>
+            <option value="Las Condes,Chile">Las Condes</option>
+            <option value="San Bernardo,Chile">San Bernardo</option>
+            <option value="Peñalolén,Chile">Peñalolén</option>
+            <option value="Providencia,Chile">Providencia</option>
+            <option value="Ñuñoa,Chile">Ñuñoa</option>
+            <option value="La Reina,Chile">La Reina</option>
+            <option value="Vitacura,Chile">Vitacura</option>
+            <option value="Lo Barnechea,Chile">Lo Barnechea</option>
+            <option value="Colina,Chile">Colina</option>
+            <option value="Lampa,Chile">Lampa</option>
+            <option value="Buin,Chile">Buin</option>
+            <option value="Paine,Chile">Paine</option>
+            <option value="Talagante,Chile">Talagante</option>
+            <option value="Peñaflor,Chile">Peñaflor</option>
+            <option value="Melipilla,Chile">Melipilla</option>
+            <option value="Rancagua,Chile">Rancagua</option>
+            <option value="San Fernando,Chile">San Fernando</option>
+            <option value="Rengo,Chile">Rengo</option>
+            <option value="Machalí,Chile">Machalí</option>
+            <option value="Graneros,Chile">Graneros</option>
+            <option value="Pichilemu,Chile">Pichilemu</option>
+            <option value="Santa Cruz,Chile">Santa Cruz</option>
+            <option value="Talca,Chile">Talca</option>
+            <option value="Curicó,Chile">Curicó</option>
+            <option value="Linares,Chile">Linares</option>
+            <option value="Constitución,Chile">Constitución</option>
+            <option value="Cauquenes,Chile">Cauquenes</option>
+            <option value="Molina,Chile">Molina</option>
+            <option value="San Javier,Chile">San Javier</option>
+            <option value="Parral,Chile">Parral</option>
+            <option value="Chillán,Chile">Chillán</option>
+            <option value="Chillán Viejo,Chile">Chillán Viejo</option>
+            <option value="San Carlos,Chile">San Carlos</option>
+            <option value="Bulnes,Chile">Bulnes</option>
+            <option value="Quirihue,Chile">Quirihue</option>
+            <option value="Concepción,Chile">Concepción</option>
+            <option value="Talcahuano,Chile">Talcahuano</option>
+            <option value="Los Ángeles,Chile">Los Ángeles</option>
+            <option value="Chiguayante,Chile">Chiguayante</option>
+            <option value="Coronel,Chile">Coronel</option>
+            <option value="Hualpén,Chile">Hualpén</option>
+            <option value="San Pedro de la Paz,Chile">San Pedro de la Paz</option>
+            <option value="Tomé,Chile">Tomé</option>
+            <option value="Penco,Chile">Penco</option>
+            <option value="Lota,Chile">Lota</option>
+            <option value="Arauco,Chile">Arauco</option>
+            <option value="Lebu,Chile">Lebu</option>
+            <option value="Mulchén,Chile">Mulchén</option>
+            <option value="Nacimiento,Chile">Nacimiento</option>
+            <option value="Cañete,Chile">Cañete</option>
+            <option value="Temuco,Chile">Temuco</option>
+            <option value="Padre Las Casas,Chile">Padre Las Casas</option>
+            <option value="Angol,Chile">Angol</option>
+            <option value="Villarrica,Chile">Villarrica</option>
+            <option value="Pucón,Chile">Pucón</option>
+            <option value="Lautaro,Chile">Lautaro</option>
+            <option value="Victoria,Chile">Victoria</option>
+            <option value="Nueva Imperial,Chile">Nueva Imperial</option>
+            <option value="Pitrufquén,Chile">Pitrufquén</option>
+            <option value="Valdivia,Chile">Valdivia</option>
+            <option value="La Unión,Chile">La Unión</option>
+            <option value="Panguipulli,Chile">Panguipulli</option>
+            <option value="Río Bueno,Chile">Río Bueno</option>
+            <option value="Puerto Montt,Chile">Puerto Montt</option>
+            <option value="Osorno,Chile">Osorno</option>
+            <option value="Puerto Varas,Chile">Puerto Varas</option>
+            <option value="Castro,Chile">Castro</option>
+            <option value="Ancud,Chile">Ancud</option>
+            <option value="Calbuco,Chile">Calbuco</option>
+            <option value="Quellón,Chile">Quellón</option>
+            <option value="Frutillar,Chile">Frutillar</option>
+            <option value="Llanquihue,Chile">Llanquihue</option>
+            <option value="Purranque,Chile">Purranque</option>
+            <option value="Coyhaique,Chile">Coyhaique</option>
+            <option value="Puerto Aysén,Chile">Puerto Aysén</option>
+            <option value="Chile Chico,Chile">Chile Chico</option>
+            <option value="Cochrane,Chile">Cochrane</option>
+            <option value="Punta Arenas,Chile">Punta Arenas</option>
+            <option value="Puerto Natales,Chile">Puerto Natales</option>
+            <option value="Porvenir,Chile">Porvenir</option>
+            <option value="Puerto Williams,Chile">Puerto Williams</option>
+          </select>
+          <weather-crypto-widget id="weather-widget" city="Santiago,Chile"></weather-crypto-widget>
         </div>
 
         <section class="sidebar-section">
@@ -481,5 +639,10 @@
     </footer>
 
     <script type="module" src="http://localhost:3002/weather-crypto-widget.js"></script>
+    <script>
+      document.getElementById('city-select').addEventListener('change', (e) => {
+        document.getElementById('weather-widget').setAttribute('city', e.target.value);
+      });
+    </script>
   </body>
 </html>

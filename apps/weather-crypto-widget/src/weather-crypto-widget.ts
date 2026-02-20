@@ -3,6 +3,8 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { DashboardData } from './types';
 import { globalStyles } from './styles';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 @customElement('weather-crypto-widget')
 export class WeatherCryptoWidget extends LitElement {
   static override styles = globalStyles;
@@ -16,7 +18,7 @@ export class WeatherCryptoWidget extends LitElement {
   //widget function
   private async fetchData() {
     try {
-      const response = await fetch('http://localhost:3001/api/dashboard-widget');
+      const response = await fetch(`${API_URL}/api/dashboard-widget?city=${this.city}`);
 
       if (!response.ok && response.status >= 500) {
         throw new Error(`Error del servidor: ${response.status}`);
@@ -42,6 +44,12 @@ export class WeatherCryptoWidget extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.fetchData();
+  }
+
+  updated(changedProperties: Map<string, unknown>): void {
+    if (changedProperties.has('city')) {
+      this.fetchData();
+    }
   }
 
   //weather section
