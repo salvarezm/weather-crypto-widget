@@ -30,6 +30,8 @@ API (fastify) -> Web Component (lit).
 
 **npm workspaces**: es una manera simple pero poderosa de versionar distintos proyectos relacionados entre sí
 
+**Vitest**: es una alternativa mas rapida que su competidor mas cercano "Jest" y opera con ESM de manera nativa por lo que se integra mejor con Vite que es nuestra herramienta de desarrollo principal.
+
 Otras alternativas exploradas:
 
 - React + Vite + MF
@@ -39,6 +41,7 @@ Otras alternativas exploradas:
 - Express
 - Nx
 - Java Spring boot
+- Jest
 
 ## Registro de prompts de IA
 
