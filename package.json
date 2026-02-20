@@ -15,7 +15,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "npm test --workspaces --if-present"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
