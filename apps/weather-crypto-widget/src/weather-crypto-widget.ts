@@ -31,6 +31,7 @@ export class WeatherCryptoWidget extends LitElement {
 
       if (!response.ok || response.status >= 500) {
         this.error = 'Ocurrio un problema inesperado';
+        return;
       }
 
       const data = (await response.json()) as DashboardData;

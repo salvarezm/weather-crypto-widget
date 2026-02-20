@@ -17,9 +17,7 @@ axiosRetry(axios, {
 async function cryptoService(fastify: FastifyInstance) {
   fastify.decorate('cryptoService', {
     async getBtcData(): Promise<CoinGeckoResponse | null> {
-      const res = await axios.get(COINGECKO_API_URL, {
-        timeout: 5000,
-      });
+      const res = await axios.get(COINGECKO_API_URL);
 
       return res.data as CoinGeckoResponse;
     },
