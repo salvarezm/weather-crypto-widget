@@ -17,8 +17,8 @@ export interface WeatherData {
 
 export interface CryptoData {
   bitcoin: {
-    clp: number;
-    clp_24h_change: number;
+    usd: number;
+    usd_24h_change: number;
     last_updated_at: string;
   };
 }

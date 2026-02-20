@@ -9,6 +9,7 @@ config();
 
 // la api de clima no es estable
 axiosRetry(axios, {
+  retries: 3,
   retryDelay: (retryCount) => {
     return retryCount * 1000;
   },

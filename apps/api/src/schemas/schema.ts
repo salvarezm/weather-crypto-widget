@@ -42,8 +42,8 @@ export const dashboardResponseSchema = {
         bitcoin: {
           type: ['object', 'null'],
           properties: {
-            clp: { type: 'number' },
-            clp_24h_change: { type: 'number' },
+            usd: { type: 'number' },
+            usd_24h_change: { type: 'number' },
             last_updated_at: { type: 'number' },
           },
         },

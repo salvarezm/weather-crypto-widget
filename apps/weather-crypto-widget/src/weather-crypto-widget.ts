@@ -33,10 +33,10 @@ export class WeatherCryptoWidget extends LitElement {
   }
 
   private formatPrice(price: number): string {
-    return new Intl.NumberFormat('es-CL', {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'CLP',
-      maximumFractionDigits: 0,
+      currency: 'USD',
+      maximumFractionDigits: 2,
     }).format(price);
   }
 
@@ -102,9 +102,9 @@ export class WeatherCryptoWidget extends LitElement {
         </div>
         <div class="bitcoin-info">
           <div>Bitcoin (BTC)</div>
-          <div class="bitcoin-title">${this.formatPrice(crypto.bitcoin?.clp)}</div>
-          <div class=${crypto.bitcoin?.clp_24h_change > 0 ? 'bitcoin-up' : 'bitcoin-down'}>
-            ${crypto.bitcoin?.clp_24h_change.toFixed(2)}% (24h)
+          <div class="bitcoin-title">${this.formatPrice(crypto.bitcoin?.usd)}</div>
+          <div class=${crypto.bitcoin?.usd_24h_change > 0 ? 'bitcoin-up' : 'bitcoin-down'}>
+            ${crypto.bitcoin?.usd_24h_change.toFixed(2)}% (24h)
           </div>
         </div>
       </div>
