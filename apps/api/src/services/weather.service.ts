@@ -1,19 +1,10 @@
 import { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
 import { WeatherApiResponse, WeatherApiResponseSchema } from '../schemas/schema';
 import { config } from 'dotenv';
 
 config();
-
-// la api de clima no es estable
-axiosRetry(axios, {
-  retries: 3,
-  retryDelay: (retryCount) => {
-    return retryCount * 1000;
-  },
-});
 
 async function weatherService(fastify: FastifyInstance) {
   fastify.decorate('weatherService', {
@@ -25,19 +16,23 @@ async function weatherService(fastify: FastifyInstance) {
         return null;
       }
 
-      // llamamos a la api del clima
-      const res = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${encodeURIComponent(city)}`
-      );
+      try {
+        const res = await axios.get(
+          `https://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${encodeURIComponent(city)}`
+        );
 
-      const parsed = WeatherApiResponseSchema.safeParse(res.data);
+        const parsed = WeatherApiResponseSchema.safeParse(res.data);
 
-      if (!parsed.success) {
-        fastify.log.error({ error: parsed.error }, 'Invalid WeatherAPI response');
+        if (!parsed.success) {
+          fastify.log.error({ error: parsed.error }, 'Invalid WeatherAPI response');
+          return null;
+        }
+
+        return parsed.data;
+      } catch (err) {
+        fastify.log.error(err, 'Error inesperado en WeatherService');
         return null;
       }
-
-      return parsed.data;
     },
   });
 }
