@@ -81,4 +81,50 @@ export const globalStyles = css`
     font-weight: 700;
     color: #ef4444;
   }
+
+  /* Loading */
+
+  .loading-state {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading-text {
+    color: var(--widget-text-secondary);
+    font-size: 0.875rem;
+  }
+
+  /* Error section */
+  .error-state {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .error-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ebce51;
+  }
+
+  .error-message {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
 `;

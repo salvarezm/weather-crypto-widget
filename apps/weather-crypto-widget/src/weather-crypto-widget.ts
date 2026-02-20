@@ -15,20 +15,32 @@ export class WeatherCryptoWidget extends LitElement {
   @state()
   private data: DashboardData | null = null;
 
+  @state()
+  private loading = true;
+
+  @state()
+  private error: string | null = null;
+
   //widget function
   private async fetchData() {
+    this.loading = true;
+    this.error = null;
+
     try {
       const response = await fetch(`${API_URL}/api/dashboard-widget?city=${this.city}`);
 
-      if (!response.ok && response.status >= 500) {
-        throw new Error(`Error del servidor: ${response.status}`);
+      if (!response.ok || response.status >= 500) {
+        this.error = 'Ocurrio un problema inesperado';
       }
 
       const data = (await response.json()) as DashboardData;
 
       this.data = data;
     } catch (err) {
-      throw new Error(`Error en el widget: ${err}`);
+      console.error(err);
+      this.error = 'Ocurrio un problema inesperado';
+    } finally {
+      this.loading = false;
     }
   }
 
@@ -50,6 +62,28 @@ export class WeatherCryptoWidget extends LitElement {
     if (changedProperties.has('city')) {
       this.fetchData();
     }
+  }
+
+  //loading section
+  private renderLoading() {
+    return html`<div class="widget-card">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <div class="loading-text">Cargando...</div>
+      </div>
+    </div>`;
+  }
+
+  //error section
+  private renderError() {
+    return html`
+      <div class="widget-card">
+        <div class="error-state">
+          <div class="error-icon">&#9888;</div>
+          <div class="error-message">${this.error}</div>
+        </div>
+      </div>
+    `;
   }
 
   //weather section
@@ -112,6 +146,14 @@ export class WeatherCryptoWidget extends LitElement {
   }
 
   render() {
+    if (this.loading) {
+      return this.renderLoading();
+    }
+
+    if (this.error) {
+      return this.renderError();
+    }
+
     return html` <div class="widget-card">
       <div class="widget-content">${this.renderWeatherSection()} ${this.renderCryptoSection()}</div>
     </div>`;
