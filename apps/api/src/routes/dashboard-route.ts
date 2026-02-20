@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import { CoinGeckoResponse, WeatherApiResponse } from '../types';
+import { CryptoResponse, WeatherApiResponse } from '../types';
 import { dashboardQuerySchema, dashboardResponseSchema } from '../schemas/schema';
 
 const registerDashboardRoute = async (app: FastifyInstance) => {
@@ -22,7 +22,7 @@ const registerDashboardRoute = async (app: FastifyInstance) => {
       ]);
 
       let weather: WeatherApiResponse | null = null;
-      let crypto: CoinGeckoResponse | null = null;
+      let crypto: CryptoResponse | null = null;
 
       if (weatherResult.status === 'fulfilled') {
         weather = weatherResult.value;

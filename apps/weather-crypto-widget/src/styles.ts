@@ -106,7 +106,6 @@ export const globalStyles = css`
   }
 
   .loading-text {
-    color: var(--widget-text-secondary);
     font-size: 0.875rem;
   }
 

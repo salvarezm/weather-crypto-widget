@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import { WeatherApiResponse } from '../types';
+import { WeatherApiResponse, WeatherApiResponseSchema } from '../schemas/schema';
 import { config } from 'dotenv';
 
 config();
@@ -27,10 +27,17 @@ async function weatherService(fastify: FastifyInstance) {
 
       // llamamos a la api del clima
       const res = await axios.get(
-        `http://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${city}`
+        `https://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${city}`
       );
 
-      return res.data as WeatherApiResponse;
+      const parsed = WeatherApiResponseSchema.safeParse(res.data);
+
+      if (!parsed.success) {
+        fastify.log.error({ error: parsed.error }, 'Invalid WeatherAPI response');
+        return null;
+      }
+
+      return parsed.data;
     },
   });
 }

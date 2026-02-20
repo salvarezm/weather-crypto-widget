@@ -1,3 +1,36 @@
+import { z } from 'zod';
+
+// Zod schemas para validación runtime
+export const CryptoResponseSchema = z.object({
+  bitcoin: z.object({
+    usd: z.number(),
+    usd_24h_change: z.number(),
+    last_updated_at: z.number(),
+  }),
+});
+
+export type CryptoResponse = z.infer<typeof CryptoResponseSchema>;
+
+export const WeatherApiResponseSchema = z.object({
+  location: z.object({
+    name: z.string(),
+    country: z.string(),
+  }),
+  current: z.object({
+    temp_c: z.number(),
+    feelslike_c: z.number(),
+    humidity: z.number(),
+    wind_kph: z.number(),
+    condition: z.object({
+      text: z.string(),
+      icon: z.string(),
+    }),
+  }),
+});
+
+export type WeatherApiResponse = z.infer<typeof WeatherApiResponseSchema>;
+
+// Fastify JSON schemas
 export const dashboardQuerySchema = {
   type: 'object',
   properties: {

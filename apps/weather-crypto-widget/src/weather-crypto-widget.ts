@@ -21,7 +21,6 @@ export class WeatherCryptoWidget extends LitElement {
   @state()
   private error: string | null = null;
 
-  //widget function
   private async fetchData() {
     this.loading = true;
     this.error = null;
@@ -29,7 +28,7 @@ export class WeatherCryptoWidget extends LitElement {
     try {
       const response = await fetch(`${API_URL}/api/dashboard-widget?city=${this.city}`);
 
-      if (!response.ok || response.status >= 500) {
+      if (!response.ok) {
         this.error = 'Ocurrio un problema inesperado';
         return;
       }
@@ -53,7 +52,6 @@ export class WeatherCryptoWidget extends LitElement {
     }).format(price);
   }
 
-  //component state funcions
   connectedCallback(): void {
     super.connectedCallback();
     this.fetchData();
@@ -65,7 +63,6 @@ export class WeatherCryptoWidget extends LitElement {
     }
   }
 
-  //loading section
   private renderLoading() {
     return html`<div class="widget-card">
       <div class="loading-state">
@@ -75,7 +72,6 @@ export class WeatherCryptoWidget extends LitElement {
     </div>`;
   }
 
-  //error section
   private renderError() {
     return html`
       <div class="widget-card">
@@ -87,7 +83,6 @@ export class WeatherCryptoWidget extends LitElement {
     `;
   }
 
-  //weather section
   private renderWeatherSection() {
     const weather = this.data?.weather;
 
@@ -102,7 +97,7 @@ export class WeatherCryptoWidget extends LitElement {
     return html`
       <div class="weather-section">
         <div class="weather-icon">
-          <img src=${weather.current?.condition?.icon} />
+          <img src=${weather.current.condition.icon} />
         </div>
         <div>
           <div>${weather.location?.name}, ${weather.location?.country}</div>
@@ -116,8 +111,6 @@ export class WeatherCryptoWidget extends LitElement {
       </div>
     `;
   }
-
-  //crypto section
 
   private renderCryptoSection() {
     const crypto = this.data?.crypto;
