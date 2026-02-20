@@ -34,7 +34,11 @@ export type WeatherApiResponse = z.infer<typeof WeatherApiResponseSchema>;
 export const dashboardQuerySchema = {
   type: 'object',
   properties: {
-    city: { type: 'string' },
+    city: {
+      type: 'string',
+      minLength: 2,
+      maxLength: 100,
+    },
   },
 } as const;
 

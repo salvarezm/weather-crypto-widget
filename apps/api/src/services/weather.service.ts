@@ -27,7 +27,7 @@ async function weatherService(fastify: FastifyInstance) {
 
       // llamamos a la api del clima
       const res = await axios.get(
-        `https://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${city}`
+        `https://api.weatherapi.com/v1/current.json?key=${WEATHERAPI_KEY}&q=${encodeURIComponent(city)}`
       );
 
       const parsed = WeatherApiResponseSchema.safeParse(res.data);

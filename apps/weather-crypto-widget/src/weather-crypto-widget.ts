@@ -25,8 +25,10 @@ export class WeatherCryptoWidget extends LitElement {
     this.loading = true;
     this.error = null;
 
+    const cityEncoded = encodeURIComponent(this.city);
+
     try {
-      const response = await fetch(`${API_URL}/api/dashboard-widget?city=${this.city}`);
+      const response = await fetch(`${API_URL}/api/dashboard-widget?city=${cityEncoded}`);
 
       if (!response.ok) {
         this.error = 'Ocurrio un problema inesperado';
